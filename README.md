@@ -21,6 +21,11 @@ Make sure to also check for failure cases as the sensor getters may fail to reso
 
 ### 1. React Component Tree
 
+Add a header and a footer to the assignment app.
+Header and footer should be created seperately in distinct components and integrated into the application.
+
+### 2. Render dynamic data
+
 Use pure React to render the following data:
 
 * the current temperature
@@ -32,7 +37,7 @@ Add a `reset` button that will reset the highest/lowest temperature/humidity to 
 
 Take Clean Code principles like `Single-Responsibility` or `DRY` into consideration, they can be perfectly applied to the task at hand!
 
-### 2. Unit Tests for your application
+### 3. Unit Tests for your application
 
 In the previous assignment you (hopefully) have structured your application in a way that makes it possible to test the separate concerns of the application individually.
 Use the unit testing code stub you find in this example application as a baseline to write your own tests.
@@ -46,7 +51,7 @@ The test runner will execute the following files:
 
 It is up to you how you structure your tests, we recommend to place them as "near" as possible to the code to be tested.
 
-### 3. Application State with Redux
+### 4. Application State with Redux
 
 Up to now you have structured your application in a way that holds the state of the individual components locally.
 You learned how you can use React to create a global state that handles every state aspect of your application.
@@ -61,12 +66,12 @@ Since reducers are always pure functions without side effects it is very efficie
 The point of this assignment is to *only* create the state management logic (Actions, Action Creators, Reducer(s)) and its unit tests.
 This assignment is not yet about using this actual data in your application.
 
-### 4. `connect`ing React and Redux with react-redux
+### 5. `connect`ing React and Redux with react-redux
 
 On the one hand we have a React component tree, on the other hand there's a global state. These two things need to be connected to actually make sense.
 Use the Redux bindings for React (`react-redux`) to attach individual components to parts of the application state.
 
-### 5. Side Effects
+### 6. Side Effects
 
 In the Redux world a reducer is set up in a way that does not allow for side effects.
 In this assignment you have the task to create a "Reload" button that will query the sensor's `getTemperature` and `getHumidity` getters in order to update the current temperature and humidity.
