@@ -66,10 +66,10 @@ Since reducers are always pure functions without side effects it is very efficie
 The point of this assignment is to *only* create the state management logic (Actions, Action Creators, Reducer(s)) and its unit tests.
 This assignment is not yet about using this actual data in your application.
 
-### 5. `connect`ing React and Redux with react-redux
+### 5. redux-toolkit and the connection of React and Redux
 
 On the one hand we have a React component tree, on the other hand there's a global state. These two things need to be connected to actually make sense.
-Use the Redux bindings for React (`react-redux`) to attach individual components to parts of the application state.
+Introduce redux-toolkit to reorganize your state managment code and to connect the global state to your component tree.
 
 ### 6. Side Effects
 
@@ -85,7 +85,7 @@ Acceptance Criteria:
 
 It may be necessary to upgrade your application state together with some new actions/reducers.
 
-### OPTIONAL ASSIGNMENT: ROUTING
+<!-- ### OPTIONAL ASSIGNMENT: ROUTING
 
 Use `react-router` to implement the possibility of switching between climate views.
 The following views should be selectable:
@@ -101,4 +101,4 @@ Additionally implement a navigation that makes the switching between views possi
 Add an additional button that makes it possible to change the temperature unit.  
 The default unit should be °C. By clicking the button repeatedly the unit should cycle through Fahrenheit, Kelvin back to °C.
 
-HINT: By facilitating a Higher-Order-Component "computation component" you can reuse your current temperature component without actually touching it.
+HINT: By facilitating a Higher-Order-Component "computation component" you can reuse your current temperature component without actually touching it. -->
