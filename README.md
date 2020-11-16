@@ -2,9 +2,8 @@
 
 In this assignments you have the task to create a climate measurement device
 which has an interface similar to the following tool:
-<div style="text-align:center">
-  <img src="thermo.jpg" width="200" />
-</div>
+
+![thermometer showing temperature and humidity, including low/high](thermo.jpg)
 
 _This assignment is **not** about creating a beautiful solution but about
 learning the intricacies of Javascript and React. It is therefore not necessary
