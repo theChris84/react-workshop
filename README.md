@@ -41,7 +41,7 @@ This should show you exactly one failing test case:
 ✕ this is a failing test on purpose to get you started
 ```
 
-You can then quite the test runner with `q` for now.
+You can then quit the test runner with `q` for now.
 
 ---
 
