@@ -32,7 +32,16 @@ The values should be changing over time.
 
 Use `npm test` to run the tests.
 
-This should initially show you exactly one (purposefully) failing test case.
+By default only tests for changed files are run. This is very convenient for
+development, but for a initial check press `a` to trigger a full test run.
+
+This should show you exactly one failing test case:
+
+```text
+✕ this is a failing test on purpose to get you started
+```
+
+You can then quite the test runner with `q` for now.
 
 ---
 
