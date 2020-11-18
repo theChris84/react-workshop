@@ -8,8 +8,30 @@ for failure cases as the sensor getters may fail to resolve sometimes.
 
 ## 1. React Component Tree
 
-Add a header and a footer to the assignment app. Header and footer should be
-created separately in distinct components and integrated into the application.
+Add a *header component* to the app that shows a nice big title at the top.
+That text that is shown shall be passed in as a `prop`.
+
+Try to find a good way to split up the application into components. You will
+notice that the starting point of the application, `index.tsx`, directly renders
+the `<Climate>` component. With the newly introduced `<Header>` component, we
+need to render that as well. `ReactDOM.render` however only accepts a single
+React component.
+
+A typical pattern to solve this is to introduce a single `<App>` component that
+acts as a container for all the parts of the application. So you should end up
+with a component tree like this:
+
+```text
+(index)
+   └── App
+       ├── Header
+       └── Climate
+```
+
+If you have some time left, feel free to either:
+
+* Add a footer as well
+* Add some styling (you can put CSS rules into `index.css`)
 
 ## 2. Render Dynamic Data
 
