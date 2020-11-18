@@ -91,26 +91,3 @@ update the current temperature and humidity.
 
 It may be necessary to upgrade your application state together with some new
 actions/reducers.
-
-<!--
-### OPTIONAL ASSIGNMENT: ROUTING
-
-Use `react-router` to implement the possibility of switching between climate
-views. The following views should be selectable:
-
-* a temperature view (current, min, max)
-* a humidity view (current, min, max)
-* a view where both aspects are shown
-
-Additionally implement a navigation that makes the switching between views
-possible.
-
-### OPTIONAL ASSIGNMENT: TEMPERATURE UNIT
-
-Add an additional button that makes it possible to change the temperature
-unit. The default unit should be °C. By clicking the button repeatedly the
-unit should cycle through Fahrenheit, Kelvin back to °C.
-
-HINT: By facilitating a higher order component (computation component), you
-can reuse your current temperature component without actually touching it.
--->
