@@ -35,7 +35,7 @@ If you have some time left, feel free to either:
 
 ## 2. Render Dynamic Data
 
-Use pure React to render the following data:
+Use React to render the following data:
 
 * the current temperature
 * the highest/lowest encountered temperature
