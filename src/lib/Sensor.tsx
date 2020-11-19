@@ -3,6 +3,8 @@ import Emittery from 'emittery';
 const EVENT_NAME_TEMP = 'temperature';
 const EVENT_NAME_HUMIDITY = 'humidity';
 
+export type SensorEvent = typeof EVENT_NAME_TEMP | typeof EVENT_NAME_HUMIDITY;
+
 export class Sensor extends Emittery.Typed<{ [EVENT_NAME_TEMP]: number, [EVENT_NAME_HUMIDITY]: number }> {
   private humidity: number = 50;
   private temperature: number = 20;
