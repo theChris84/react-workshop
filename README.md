@@ -51,4 +51,9 @@ You can then quit the test runner with `q` for now.
 
 ## Assignments
 
-When everything is up and running, move on to the [assignments](assignments.md).
+1. [React Component Tree](assignment-1.md)
+2. [Render Dynamic Data](assignment-2.md)
+3. [Tests](assignment-3.md)
+4. [Application State with Redux](assignment-4.md)
+5. [Redux Toolkit](assignment-5.md)
+6. [Side Effects with Redux Thunk](assignment-6.md)
