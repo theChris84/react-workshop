@@ -14,6 +14,9 @@ test('Climate app shows the current temperature (example usage of test sensor)',
     //    almost impossible to test. We need to control the emitted values.
     const { findByText } = render(<Climate sensor={testSensor} />);
 
+    // No value from the sensor yet, so "-" is shown.
+    expect(await findByText(/temperature:/i)).toHaveTextContent('-');
+
     // We let the sensor emit a temperature value of 21:
     testSensor.emit('temperature', 21);
 
