@@ -36,18 +36,60 @@ If you have some time left, feel free to either:
 
 ## 2. Render Dynamic Data
 
-Use React to render the following data:
+### 2.1 Extract Child Component
 
-* the current temperature
-* the highest/lowest encountered temperature
-* the current humidity
-* the highest/lowest encountered humidity
+The existing `Climate` component has some duplication in it: event handling and
+rendering of the emitted values is the same for *temperature* and *humidity*.
+Being good developers, we are aware of the
+[*single responsibility principle*](https://en.wikipedia.org/wiki/Single-responsibility_principle)
+and [*DRY*](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), so let's
+remove that. We will see later that this makes the addition of new features much
+easier!
 
-Add *reset* buttons that will reset the highest/lowest temperature/humidity to
-the current values.
+Introduce a new component that can be used twice by the `Climate` component, to
+deal with either *temperature* or *humidity*.
 
-Take *clean code* principles like *single responsibility* or *DRY* into
-consideration, they can be perfectly applied to the task at hand!
+See what that component needs from its parent, and pass those things via props.
+The `render` method of `Climate` will use the new component twice: once for the
+temperature, and once for the humidity.
+
+#### Hints
+
+This is a refactoring task, so the functionality should not change! You can even
+use the existing test (run with `npm test`) to be sure.
+
+### 3.2 Add Minimum and Maximum
+
+In addition to current temperature and humidity, the minimum and maximum of
+those values over time shall be shown.
+
+Adapt your new component so that it keeps track of the minimum and maximum in
+its state. Make sure that after each new emitted value from the sensor, the
+current, minimum, and maximum values are updated.
+
+Notice how each instance of the component has its own independant state.
+
+#### Hints
+
+This will very likely break the existing test. Ignore that for now, we will fix
+that in a later assignment.
+
+### 3.3 Add a Reset Button
+
+After the application is running for a while, the user might want to reset those
+minimum and maximum values. Add a button that does that. When it is clicked,
+both minimum and maximum should be reset to the current value.
+
+### 3.4 Improve Value Display *(optional)*
+
+If you have some time left, improve your component so that the values are
+presented in a nicer way.
+
+The values shall be rounded to one decimal, and an appropriate unit shall be
+shown for temperature (*° C*) and humidity (*%*).
+
+Think about what the pros and cons of different approaches to this are.
+With or without new props, with or without a new child component, …
 
 ## 3. Add Tests
 
@@ -114,10 +156,10 @@ When it works, add a similar test for the current humidity value.
 
 #### Hints
 
-You probably have introduced a child component in assignment 3.2 and are using
-that in your `Climate` component. We are still just writing tests on the level
-of the `Climate` component and not on the child component though. That is not a
-unit test, but an integration test, and it's the approach we want to use here.
+You have introduced a child component in assignment 3.2 and are using that in
+your `Climate` component. We are still just writing tests on the level of the
+`Climate` component and not on the child component though. That is not a unit
+test, but an integration test, and it's the approach we want to use here.
 
 If you have trouble writing a good query to find the current temperature and
 humidity values, change your component so that it adds `data-testid` attributes.
