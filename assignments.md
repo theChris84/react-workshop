@@ -1,11 +1,5 @@
 # Assignments
 
-In the sample code you find the class `Sensor` which is an `EventEmitter` that
-emits `temperature` and `humidity` events. It also has the getters
-`getTemperature` and `getHumidity`. These getters are asynchronous which means
-that they return a promise that will resolve eventually. Make sure to also check
-for failure cases as the sensor getters may fail to resolve sometimes.
-
 ## 1. React Component Tree
 
 Add a *header component* to the app that shows a nice big title at the top.
@@ -35,6 +29,12 @@ If you have some time left, feel free to either:
 * Add some styling (you can put CSS rules into `index.css`)
 
 ## 2. Render Dynamic Data
+
+Take a look at the existing `Climate` component. It receives a `Sensor` as a
+prop. This sensor is an `EventEmitter` that emits `temperature` and `humidity`
+events. The component is registering event handlers to those, and updates its
+state accordingly. This leads to React rendering the component each time a new
+value is received.
 
 ### 2.1 Extract Child Component
 
@@ -229,22 +229,28 @@ global state. These two things need to be connected to actually make sense.
 Introduce *Redux Toolkit* to reorganize your state management code and to
 connect the global state to your component tree.
 
-## 6. Side Effects
+## 6. Side Effects with Redux Thunk
 
 In the Redux world a reducer is set up in a way that does not allow for side
 effects. In this assignment you have the task to create a *reload* button that
 will query the sensor's `getTemperature` and `getHumidity` getters in order to
 update the current temperature and humidity.
 
+These getters are asynchronous, which means that they return a promise that will
+resolve eventually. Make sure to also check for failure cases, as the sensor
+getters may fail to resolve sometimes.
+
+Use *Redux Thunk* for this task.
+
 ### Acceptance Criteria
 
-* a reload button is added to the frontend
+* a reload button is shown
 * a click on the reload button triggers an update of the current temperature and
-  humidity via the getters
-* while the requested values are loaded a "loading..." message is shown on the
+  humidity values via the getters
+* while the requested values are loaded a "loading…" message is shown on the
   button in the meantime
-* when one of the getter requests errors an appropriate message is displayed on
-  the button
+* when one of the getter fails (the promise rejects), an appropriate message is
+  displayed on the button
 
 It may be necessary to upgrade your application state together with some new
 actions/reducers.
