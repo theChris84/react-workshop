@@ -9,11 +9,13 @@ export class Sensor extends Emittery.Typed<{ [EVENT_NAME_TEMP]: number, [EVENT_N
   private humidity: number = 50;
   private temperature: number = 20;
 
-  constructor() {
+  constructor(startEmittingValues = true) {
     super();
 
-    this._humidityTick();
-    this._temperatureTick();
+    if (startEmittingValues) {
+      this._humidityTick();
+      this._temperatureTick();
+    }
   }
 
   /**
@@ -81,4 +83,26 @@ export class Sensor extends Emittery.Typed<{ [EVENT_NAME_TEMP]: number, [EVENT_N
   }
 }
 
-export default new Sensor();
+
+/**
+ * Use this sensor in the app. It emits temperature and humidity events every
+ * few seconds. The values of the emitted events change over time randomly.
+ *
+ * Example usage:
+ *
+ * `sensor.on('temperature', value => console.log(value));`
+ * `sensor.on('humidity', value => console.log(value));`
+ */
+export const sensor = new Sensor();
+
+
+const startEmittingValues = false;
+
+/**
+ * Use this sensor in tests. It does not emit temperature or humidity events
+ * by itself. Instead, you can trigger those yourself like this:
+ *
+ * `testSensor.emit('temperature', 18.5);`
+ * `testSensor.emit('humidity', 66.9);`
+ */
+export const testSensor = new Sensor(startEmittingValues);

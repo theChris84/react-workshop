@@ -39,10 +39,10 @@ Use `npm test` to run the tests.
 By default only tests for changed files are run. This is very convenient for
 development, but for a initial check press `a` to trigger a full test run.
 
-This should show you exactly one failing test case:
+This should show you exactly one succeeding test case:
 
 ```text
-✕ this is a failing test on purpose to get you started
+✓ Climate app shows the current temperature (example usage of test sensor)
 ```
 
 You can then quit the test runner with `q` for now.

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import sensor from './lib/Sensor';
+import { sensor } from './lib/Sensor';
 import Climate from './components/Climate';
 
 import './index.css';
