@@ -25,10 +25,9 @@ You can use the editor/IDE of your choice, but when in doubt, we recommend
 2. Install the dependencies: `npm install`
 3. Use `npm start` to start the application stub
 
-This should compile the app and open a browser, resulting in something like
-this:
+This compiles the app and opens a browser, resulting in something like this:
 
-![example screenshot of app in its initial state](app-stub.png)
+![example of app in its initial state](app-initial.gif)
 
 The values should be changing over time.
 
@@ -51,4 +50,9 @@ You can then quit the test runner with `q` for now.
 
 ## Assignments
 
-When everything is up and running, move on to the [assignments](assignments.md).
+1. [React Component Tree](assignment-1.md)
+2. [Render Dynamic Data](assignment-2.md)
+3. [Tests](assignment-3.md)
+4. [Application State with Redux](assignment-4.md)
+5. [Redux Toolkit](assignment-5.md)
+6. [Side Effects with Redux Thunk](assignment-6.md)

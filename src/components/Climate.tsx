@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { Sensor } from '../lib/Sensor';
 
 type ClimateProps = { sensor: Sensor };
-type ClimateState = { temperature: number, humidity: number };
+type ClimateState = { temperature: number | null, humidity: number | null };
 
 class Climate extends Component<ClimateProps, ClimateState> {
   state: ClimateState = {
-    temperature: 20,
-    humidity: 50
+    temperature: null,
+    humidity: null,
   };
 
   componentDidMount() {
@@ -23,11 +23,11 @@ class Climate extends Component<ClimateProps, ClimateState> {
     return (
       <div>
         <div id="temperature">
-          temperature: {this.state.temperature}
+          Temperature: {this.state.temperature ?? '-'}
         </div>
 
         <div id="humidity">
-          humidity: {this.state.humidity}
+          Humidity: {this.state.humidity ?? '-'}
         </div>
       </div>
     );
