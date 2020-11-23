@@ -35,10 +35,6 @@ Try to `render` the component with different text values that you pass in as a
 prop. Use `getByRole` and `toHaveTextContent` to find the rendered header in the
 DOM and check its text content.
 
-*Optional:* If you're feeling fancy, you can use
-[Jest's `test.each`](https://jestjs.io/docs/en/api#testeachtablename-fn-timeout)
-to create a parametrized test.
-
 ### Hints
 
 The [Testing Playground Chrome extension](https://chrome.google.com/webstore/detail/testing-playground/hejbmebodbijjdhflfknehhcgaklhano)
@@ -91,8 +87,7 @@ values are emitted by the sensor.
 
 Try to avoid using a `data-testid` this time. Query for the button with
 `findByRole` and a `name` option. The *Testing Playground* extension can help
-you again. If both of your buttons have the same text, change that! It makes
-your app more accessible, e.g. to screen readers.
+you again.
 
 Again, it is sufficient to do this for either temperature or humidity.
 

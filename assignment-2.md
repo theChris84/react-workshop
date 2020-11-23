@@ -31,13 +31,8 @@ use the existing test (run with `npm test`) to be sure.
 ## 2.2 Add Minimum and Maximum
 
 In addition to current temperature and humidity, the minimum and maximum of
-those values over time shall be shown.
-
-Adapt your new component so that it keeps track of the minimum and maximum in
-its state. Make sure that after each new emitted value from the sensor, the
-current, minimum, and maximum values are updated.
-
-Notice how each instance of the component has its own independant state.
+those values over time shall be shown. Make sure that after each new emitted
+value from the sensor, the current, minimum, and maximum values are updated.
 
 ### Hints
 

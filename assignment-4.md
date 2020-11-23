@@ -1,7 +1,7 @@
 # Assignment 4: Application State with Redux
 
 Up to now you have structured your application in a way that holds the state of
-the individual components locally. You learned how you can use React to create a
+the individual components locally. You learned how you can use Redux to create a
 global state that handles every state aspect of your application. You now have
 the task to create these building blocks:
 
