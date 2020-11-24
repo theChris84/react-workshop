@@ -1,37 +1,29 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Sensor } from '../lib/Sensor';
+import { Humidity, Temperature } from './ClimateChild';
 
 type ClimateProps = { sensor: Sensor };
-type ClimateState = { temperature: number | null, humidity: number | null };
 
-class Climate extends Component<ClimateProps, ClimateState> {
-  state: ClimateState = {
-    temperature: null,
-    humidity: null,
-  };
+function Climate(props: ClimateProps) {
+  const [visible, setVisible] = useState(true);
 
-  componentDidMount() {
-    this.props.sensor.on('temperature', temperature => this.setState({ temperature }));
-    this.props.sensor.on('humidity', humidity => this.setState({ humidity }));
-  }
+  return (
+    <div>
+      <button onClick={() => setVisible(!visible)}>
+        {visible ? 'hide' : 'show'} me plz!
+      </button>
 
-  componentWillUnmount() {
-    this.props.sensor.clearListeners();
-  }
-
-  render() {
-    return (
-      <div>
-        <div id="temperature">
-          Temperature: {this.state.temperature ?? '-'}
-        </div>
-
-        <div id="humidity">
-          Humidity: {this.state.humidity ?? '-'}
-        </div>
+      <div id="temperature">
+        {visible && <Temperature sensor={props.sensor} />}
       </div>
-    );
-  }
+
+      <hr />
+
+      <div id="humidity">
+        {visible && <Humidity sensor={props.sensor} />}
+      </div>
+    </div>
+  );
 }
 
 export default Climate;
