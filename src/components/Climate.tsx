@@ -1,6 +1,6 @@
 import React from 'react'
 import { Sensor } from '../lib/Sensor';
-import ClimateNumber from './ClimateNumber';
+import ClimateNumber, { Humidity, Temperature } from './ClimateNumber';
 
 interface ClimateProps {
   sensor: Sensor
@@ -8,9 +8,9 @@ interface ClimateProps {
 
 const Climate = (props: ClimateProps) => (
   <div>
-    <ClimateNumber key="temperature" title='Temperature' sensorType='temperature' sensor={props.sensor} />
+    <Temperature key="temperature" sensor={props.sensor} />
     <hr />
-    <ClimateNumber key="humitity" title='Humidity' sensorType='humidity' sensor={props.sensor} />
+    <Humidity key="humitity" sensor={props.sensor} />
   </div>
 );
 

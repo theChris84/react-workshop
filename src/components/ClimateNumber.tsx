@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { stat } from 'fs';
 import React, { useEffect, useState } from 'react';
 import { Sensor, SensorEvent } from '../lib/Sensor';
 
 interface ClimateNumberProps {
     title: string,
     sensorType: SensorEvent,
-    sensor: Sensor
+    sensor: Sensor,
+    unit: string
 };
 
 interface Climate {
@@ -36,15 +38,23 @@ const ClimateNumber = (props: ClimateNumberProps) => {
         }
     }
 
+    const reset = () => {
+        setState({ min: 0, max: 0, current: 0 });
+    }
+
     const render = () => {
-        return (<div id={props.title.toLowerCase()}>
-            {props.title}:
-            {
-                state
-                    ? <MinMaxCurrent value={state} />
-                    : '-'
-            }
-        </div>);
+        return (
+            <div id={props.title.toLowerCase()}>
+                {props.title}:
+                {
+                    state
+                        ? <MinMaxCurrent value={state} />
+                        : '-'
+                }
+                <div>
+                    <button onClick={reset}>Reset</button>
+                </div>
+            </div>);
     }
     return render();
 }
@@ -57,5 +67,14 @@ const MinMaxCurrent = ({ value }: { value: Climate }) =>
             <li>Current: {value.current}</li>
         </ul>
     )
+
+
+export function Temperature(props: { sensor: Sensor }) {
+    return <ClimateNumber title="Temperature" sensor={props.sensor} unit='°C' sensorType="temperature" />
+}
+
+export function Humidity(props: { sensor: Sensor }) {
+    return <ClimateNumber title="Humitity" sensor={props.sensor} unit='%' sensorType="humidity" />
+}
 
 export default ClimateNumber
