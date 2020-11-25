@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import { sensor } from './lib/Sensor';
-import Climate from './components/Climate';
+import App from './App';
 
 import './index.css';
 
 ReactDOM.render(
-    <Climate sensor={sensor} />,
+    <App />,
     document.getElementById('root')
 );
