@@ -1,6 +1,6 @@
 import React from 'react'
 import { Sensor } from '../lib/Sensor';
-import ClimateNumber, { Humidity, Temperature } from './ClimateNumber';
+import { Humidity, Temperature } from './ClimateNumber';
 
 interface ClimateProps {
   sensor: Sensor

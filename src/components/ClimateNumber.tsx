@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { stat } from 'fs';
 import React, { useEffect, useState } from 'react';
 import { Sensor, SensorEvent } from '../lib/Sensor';
 
@@ -10,47 +9,39 @@ interface ClimateNumberProps {
     unit: string
 };
 
-interface Climate {
+interface ClimateValue {
     min: number,
     max: number,
     current: number
 }
 
-const ClimateNumber = (props: ClimateNumberProps) => {
-    const [state, setState] = useState<Climate>();
-    useEffect(() => setupAndTearDown(), []);
+const ClimateNumber = ({ title, sensorType, sensor, unit }: ClimateNumberProps) => {
+    const [state, setState] = useState<ClimateValue>({ min: Infinity, max: -Infinity, current: Infinity });
+    useEffect(() => {
+        const update = (newValue: number): void => setState(s => calcuateMinMaxCurrent(s, newValue));
+        sensor.on(sensorType, v => update(v));
+        return () => sensor.off(sensorType, update);
+    }, []);
 
-    const setupAndTearDown = () => {
-        const updateState = (newValue: number) => setState(oldstate => setMinMaxCurrent(oldstate, newValue))
-        props.sensor.on(props.sensorType, newValue => updateState(newValue));
-
-        return props.sensor.off(props.sensorType, updateState);
-    };
-
-    const setMinMaxCurrent = (oldState: Climate | undefined, current: number): Climate => {
-        if (oldState) {
-            const min = Math.min(current, oldState.min);
-            const max = Math.max(current, oldState.max);
-            return { min: min, max: max, current: current }
-        } else {
-            console.log('undefined state');
-            return { min: current, max: current, current };
-        }
+    const calcuateMinMaxCurrent = (oldState: ClimateValue, current: number): ClimateValue => {
+        const min = Math.min(oldState.min || Infinity, current);
+        const max = Math.max(oldState.max || -Infinity, current);
+        return { min, max, current: current }
     }
 
-    const reset = () => {
-        setState({ min: 0, max: 0, current: 0 });
-    }
+    const reset = () =>
+        setState(
+            {
+                min: state.current,
+                max: state.current,
+                current: state.current
+            });
 
     const render = () => {
         return (
-            <div id={props.title.toLowerCase()}>
-                {props.title}:
-                {
-                    state
-                        ? <MinMaxCurrent value={state} />
-                        : '-'
-                }
+            <div id={title.toLowerCase()}>
+                <div><h2>{title}:</h2></div>
+                <MinMaxCurrent value={state} unit={unit} />
                 <div>
                     <button onClick={reset}>Reset</button>
                 </div>
@@ -59,14 +50,21 @@ const ClimateNumber = (props: ClimateNumberProps) => {
     return render();
 }
 
-const MinMaxCurrent = ({ value }: { value: Climate }) =>
-    (
+const MinMaxCurrent = ({ unit, value }: { unit: string, value: ClimateValue }) => {
+    const { min, max, current } = value;
+    return (
         <ul>
-            <li>Min: {value.min}</li>
-            <li>Max: {value.max}</li>
-            <li>Current: {value.current}</li>
+            <li>Min:        {printNumber(unit, min)}</li>
+            <li>Max:        {printNumber(unit, max)}</li>
+            <li>Current:    {printNumber(unit, current)}</li>
         </ul>
     )
+}
+
+const printNumber = (unit: string, value: number): string =>
+    Number.isFinite(value)
+        ? `${value.toFixed(2)}${unit}`
+        : '-'
 
 
 export function Temperature(props: { sensor: Sensor }) {
@@ -76,5 +74,3 @@ export function Temperature(props: { sensor: Sensor }) {
 export function Humidity(props: { sensor: Sensor }) {
     return <ClimateNumber title="Humitity" sensor={props.sensor} unit='%' sensorType="humidity" />
 }
-
-export default ClimateNumber

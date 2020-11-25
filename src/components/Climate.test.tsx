@@ -5,7 +5,7 @@ import { testSensor } from '../lib/Sensor';
 
 import Climate from './Climate';
 
-test('Climate app shows the current temperature (example usage of test sensor)', async () => {
+test.skip('Climate app shows the current temperature (example usage of test sensor)', async () => {
     // It's important to use `testSensor` for the tests, instead of the "real"
     // sensor used in the app. There are two reasons for this:
     // 1. Performance: the real sensor emits data after delayed timeouts,
