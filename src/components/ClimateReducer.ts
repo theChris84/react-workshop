@@ -1,66 +1,46 @@
-import { AnyAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export const SET_TEMPERATURE = 'SetTemperature';
-export const RESET_TEMPERATURE = 'ResetTemperature';
-const SET_HUMITITY = 'SetHumitity';
-
-export type ClimateAppActions = SetTemperatureAction | ResetTemperatureAction | AnyAction
-
-type ResetTemperatureAction = {
-    type: typeof RESET_TEMPERATURE,
-    payload: undefined;
-}
-
-type SetTemperatureAction = {
-    type: typeof SET_TEMPERATURE,
-    payload: number
-}
-
-type SetHumitityAction = {
-    type: typeof SET_TEMPERATURE,
-    payload: number
-}
-
-type SensorData = {
-    min: number,
-    max: number,
-    current: number
-}
+export type ClimateValue = {
+  min: number;
+  max: number;
+  current: number;
+};
 
 export type ClimateAppState = {
-    temperature: SensorData,
-    humitity: SensorData
-}
+  temperature: ClimateValue;
+  humitity: ClimateValue;
+};
 
-export const setTemperature = (value: number): SetTemperatureAction => ({ type: SET_TEMPERATURE, payload: value })
-export const resetTemperature = (): ResetTemperatureAction => ({ type: RESET_TEMPERATURE, payload: undefined })
-
-export const createInitialClimateAppState = () => ({
-    temperature: { min: -Infinity, max: Infinity, current: Infinity },
-    humitity: { min: -Infinity, max: Infinity, current: Infinity }
+export const createInitialClimateAppState = (): ClimateAppState => ({
+  temperature: { min: +Infinity, max: -Infinity, current: Infinity },
+  humitity: { min: +Infinity, max: -Infinity, current: Infinity },
 });
 
-export default function reducer(state: ClimateAppState = createInitialClimateAppState(), action: ClimateAppActions): ClimateAppState {
-    switch (action.type) {
-        case SET_TEMPERATURE:
-            return {
-                ...state,
-                temperature: {
-                    min: Math.min(state.temperature.min, action.payload),
-                    max: Math.max(state.temperature.max, action.payload),
-                    current: action.payload
-                }
-            }
-        case RESET_TEMPERATURE:
-            return {
-                ...state,
-                temperature: {
-                    min: state.temperature.current,
-                    max: state.temperature.current,
-                    current: state.temperature.current
-                }
-            }
-        default:
-            return state;
-    }
-}
+const climateSlice = createSlice({
+  name: 'climate',
+  initialState: createInitialClimateAppState(),
+  reducers: {
+    setTemperature: (draft, action: PayloadAction<number>) => {
+      const current = action.payload;
+      const min = Math.min(draft.temperature.min, action.payload);
+      const max = Math.max(draft.temperature.max, action.payload);
+      draft.temperature.current = current;
+      draft.temperature.min = min;
+      draft.temperature.max = max;
+    },
+    setHumitity: (draft, action: PayloadAction<number>) => {
+      const current = action.payload;
+      const min = Math.min(draft.humitity.min, action.payload);
+      const max = Math.max(draft.humitity.max, action.payload);
+      draft.humitity.current = current;
+      draft.humitity.min = min;
+      draft.humitity.max = max;
+    },
+  },
+});
+
+export const selectTemperature = (state: ClimateAppState) => state.temperature;
+export const selectHumitity = (state: ClimateAppState) => state.humitity;
+export const { setTemperature, setHumitity } = climateSlice.actions;
+
+export default climateSlice.reducer;
