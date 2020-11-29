@@ -1,10 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export enum ReloadStateType {
-  default,
-  loading,
-  error,
-}
+import { AppState } from '../App/AppState';
 
 export type ClimateValue = {
   min: number;
@@ -12,16 +7,14 @@ export type ClimateValue = {
   current: number;
 };
 
-export type ClimateAppState = {
+export type ClimateState = {
   temperature: ClimateValue;
   humidity: ClimateValue;
-  reloadState: ReloadStateType;
 };
 
-export const createInitialClimateAppState = (): ClimateAppState => ({
+export const createInitialClimateAppState = (): ClimateState => ({
   temperature: { min: +Infinity, max: -Infinity, current: Infinity },
   humidity: { min: +Infinity, max: -Infinity, current: Infinity },
-  reloadState: ReloadStateType.default,
 });
 
 const climateSlice = createSlice({
@@ -55,26 +48,15 @@ const climateSlice = createSlice({
         reloadState: ReloadStateType.default,
       }; */
     },
-    setNormal: (draft) => {
-      draft.reloadState = ReloadStateType.default;
-    },
-    setLoading: (draft) => {
-      draft.reloadState = ReloadStateType.loading;
-    },
-    setError: (draft) => {
-      draft.reloadState = ReloadStateType.error;
-    },
   },
 });
 
-export const selectTemperature = (state: ClimateAppState) => state.temperature;
-export const selectHumitity = (state: ClimateAppState) => state.humidity;
-export const selectReloadState = (state: ClimateAppState) => state.reloadState;
+export const selectTemperature = (state: AppState) => state.climate.temperature;
+export const selectHumitity = (state: AppState) => state.climate.humidity;
 export const {
   setTemperature,
   setHumitity,
   resetClimate,
 } = climateSlice.actions;
-export const { setNormal, setLoading, setError } = climateSlice.actions;
 
 export default climateSlice.reducer;

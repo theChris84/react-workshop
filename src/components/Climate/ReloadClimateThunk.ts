@@ -1,12 +1,7 @@
 import { AppThunk } from '../App/App';
 import { Sensor } from '../../lib/Sensor';
-import {
-  setError,
-  setHumitity,
-  setLoading,
-  setNormal,
-  setTemperature,
-} from './ClimateReducer';
+import { setHumitity, setTemperature } from './ClimateReducer';
+import { setError, setLoading, setNormal } from '../App/PageStateReducer';
 
 export function createReloadClimateThunk(sensor: Sensor): AppThunk {
   return async (dispatch: any) => {
@@ -18,7 +13,7 @@ export function createReloadClimateThunk(sensor: Sensor): AppThunk {
       dispatch(setHumitity(humidity));
       dispatch(setNormal());
     } catch (error) {
-      dispatch(setError());
+      dispatch(setError('Uuups could not retrieve data!'));
     }
   };
 }

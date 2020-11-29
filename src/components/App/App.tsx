@@ -5,8 +5,8 @@ import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import { sensor } from '../../lib/Sensor';
 import Climate from '../Climate/Climate';
-import reducer from '../Climate/ClimateReducer';
 import Headline from '../Header/Header';
+import rootReducer from './AppState'
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<
@@ -16,7 +16,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
     Action<string> // type of a Redux action (string is the type)
 >;
 
-const store = configureStore({ reducer: reducer })
+const store = configureStore({ reducer: rootReducer })
 
 const App = () => {
     const [greeting, setGreeting] = useState('Blazing Weatherstation');
@@ -33,7 +33,5 @@ const App = () => {
         </Container>
     )
 }
-
-
 
 export default App

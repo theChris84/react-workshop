@@ -1,10 +1,10 @@
 import reducer, {
-  ClimateAppState,
+  ClimateState,
   createInitialClimateAppState,
   setTemperature,
 } from './ClimateReducer';
 
-let initialState: ClimateAppState;
+let initialState: ClimateState;
 
 beforeEach(() => {
   initialState = createInitialClimateAppState();
@@ -17,7 +17,7 @@ describe('climate reducer should', () => {
       temperature: { min: 15, max: 25, current: 10 },
     };
 
-    const newState: ClimateAppState = reducer(state, setTemperature(10));
+    const newState: ClimateState = reducer(state, setTemperature(10));
 
     expect(newState.temperature.min).toEqual(10);
   });
@@ -28,13 +28,13 @@ describe('climate reducer should', () => {
       temperature: { min: 5, max: 10, current: 0 },
     };
 
-    const newState: ClimateAppState = reducer(state, setTemperature(25));
+    const newState: ClimateState = reducer(state, setTemperature(25));
 
     expect(newState.temperature.max).toEqual(25);
   });
 
   test('reduce current temperature', () => {
-    const newState: ClimateAppState = reducer(undefined, setTemperature(42));
+    const newState: ClimateState = reducer(undefined, setTemperature(42));
 
     expect(newState.temperature.current).toEqual(42);
   });
