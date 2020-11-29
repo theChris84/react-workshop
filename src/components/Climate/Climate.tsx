@@ -1,11 +1,10 @@
-import { Button } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab/Fab';
-import { Stop, PlayArrow, Replay } from '@material-ui/icons';
+import { Stop, PlayArrow, Replay, Delete } from '@material-ui/icons';
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Sensor } from '../../lib/Sensor';
 import { Humidity, Temperature } from './ClimateNumber';
-import { ReloadStateType, selectHumitity, selectReloadState, selectTemperature, setHumitity as setHumidity, setTemperature } from './ClimateReducer';
+import { ReloadStateType, resetClimate, selectHumitity, selectReloadState, selectTemperature, setHumitity as setHumidity, setTemperature } from './ClimateReducer';
 import { createReloadClimateThunk } from './ReloadClimateThunk';
 
 interface ClimateProps {
@@ -51,6 +50,9 @@ const Climate = (props: ClimateProps) => {
       <div style={{ padding: '1em' }}>
         <Fab color="default" onClick={() => dispatch(createReloadClimateThunk(props.sensor))} disabled={reloadState === ReloadStateType.loading} >
           <Replay />
+        </Fab>
+        <Fab color="default" onClick={() => dispatch(resetClimate())}>
+          <Delete />
         </Fab>
         <Fab color="primary" onClick={() => subscribeSonsorChanges()}>
           <PlayArrow />
