@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import { sensor } from '../../lib/Sensor';
 import Climate from '../Climate/Climate';
+import Footer from '../Footer/Footer';
 import Headline from '../Header/Header';
 import rootReducer from './AppState'
 
@@ -25,9 +26,10 @@ const App = () => {
     return (
         <Container maxWidth="sm" className="App">
             <Paper>
-                <Headline headline={greeting} onChangedHeadline={handleChanged} />
                 <Provider store={store}>
+                    <Headline headline={greeting} onChangedHeadline={handleChanged} />
                     <Climate sensor={sensor} />
+                    <Footer />
                 </Provider>
             </Paper>
         </Container>

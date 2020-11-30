@@ -1,7 +1,7 @@
 import { Paper } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab/Fab';
 import { Stop, PlayArrow, Replay, Delete } from '@material-ui/icons';
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Sensor } from '../../lib/Sensor';
 import { PageState, selectPageState, selectPageStateError } from '../App/PageStateReducer';
